@@ -1,0 +1,81 @@
+= yahoo-weather
+
+== About
+
+yahoo-weather provides an object-oriented interface to the Yahoo! Weather XML
+RSS feed detailed at http://developer.yahoo.com/weather.
+
+People care a lot about the weather, which sometimes seems ironic given that
+they can just glance out the window, but we can all understand the fascination
+with details and forecasting.
+
+Log the weather information to your database! Graph it to your heart's
+content! Write a widget that emails the weather to your cell phone every five
+minutes with a link to your friend's PayPal account to deposit money if the
+weather's sunny and you both bet that it would be rainy. And the fun doesn't
+have to stop there.
+
+The RubyForge project page is at http://rubyforge.org/projects/yahoo-weather.
+
+== Installation
+
+Install the latest version via:
+
+  % gem install yahoo-weather
+
+== Usage
+
+A simple example program under <tt>examples/example.rb</tt> as:
+
+    require 'rubygems'
+    require 'yahoo-weather'
+
+    @client = YahooWeather::Client.new
+    response = @client.lookup_location('98103')
+
+    # straight text output
+    print <<edoc
+    #{response.title}
+    #{response.condition.temp} degrees
+    #{response.condition.text}
+    edoc
+    
+    # sample html output
+    print <<edoc
+    <div>
+      <img src="#{response.image_url}"><br/>
+      #{response.condition.temp} degrees #{response.units.temperature}<br/>
+      #{response.condition.text}<br>
+      Forecast:<br/>
+      #{response.forecasts[0].day} - #{response.forecasts[0].text}.  High: #{response.forecasts[0].high} Low: #{response.forecasts[0].low}<br/>
+      #{response.forecasts[1].day} - #{response.forecasts[1].text}.  High: #{response.forecasts[1].high} Low: #{response.forecasts[1].low}<br/>
+      More information <a href="#{response.page_url}">here</a>.
+    </div>
+    edoc
+    
+Produces output as:
+
+    Conditions for Seattle, WA at 2:53 pm PST
+    55 degrees F
+    Light Rain
+    <div>
+      <img src="http://us.i1.yimg.com/us.yimg.com/i/us/we/52/11.gif"><br/>
+      55 degrees F<br/>
+      Light Rain<br>
+      Forecast:<br/>
+      Sun - Rain/Wind.  High: 56 Low: 54<br/>
+      Mon - Heavy Rain/Wind.  High: 60 Low: 54<br/>
+      More information <a href="http://us.rd.yahoo.com/dailynews/rss/weather/Seattle__WA/*http://xml.weather.yahoo.com/forecast/98103_f.html">here</a>.
+    </div>
+
+There is a variety of detailed weather information in other attributes of the
+YahooWeather::Response object.
+
+== License
+
+This library is provided via the GNU LGPL license at http://www.gnu.org/licenses/lgpl.html.
+
+== Author
+
+Copyright 2006, Walter Korman <shaper@wgks.org>, http://www.lemurware.com.
+Thanks to Matthew Berk for inspiration and initial hack.

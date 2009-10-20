@@ -1,0 +1,5 @@
+- include the yahoo! weather logo image in the response
+
+- raise a module-specific exception on failure cases rather than just a string
+
+- add weather code image url accessor for forecasts
