@@ -1,3 +1,5 @@
+= YAHOO_WEATHER_20091021_1_0_1
+
 * [shaper] update documentation to reflect reality and use suffix for
   rdoc format.
 
