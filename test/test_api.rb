@@ -50,7 +50,7 @@ class TestAPI < Test::Unit::TestCase
     assert_instance_of YahooWeather::Astronomy, response.astronomy
     assert_instance_of Time, response.astronomy.sunrise
     assert_instance_of Time, response.astronomy.sunset
-    assert (response.astronomy.sunrise < response.astronomy.sunset)
+    assert(response.astronomy.sunrise < response.astronomy.sunset)
 
     # check the location
     assert_instance_of YahooWeather::Location, response.location
@@ -63,7 +63,7 @@ class TestAPI < Test::Unit::TestCase
 
     # check the wind info
     assert_instance_of YahooWeather::Wind, response.wind
-    assert (response.wind.chill <= response.condition.temp)
+    assert(response.wind.chill <= response.condition.temp)
     assert_kind_of Numeric, response.wind.direction
     assert_kind_of Numeric, response.wind.speed
     
@@ -72,14 +72,14 @@ class TestAPI < Test::Unit::TestCase
     assert_kind_of Numeric, response.atmosphere.humidity
     assert_kind_of Numeric, response.atmosphere.visibility
     assert_kind_of Numeric, response.atmosphere.pressure
-    assert (response.atmosphere.rising.is_a?(TrueClass) || response.atmosphere.rising.is_a?(FalseClass))
+    assert(response.atmosphere.rising.is_a?(TrueClass) || response.atmosphere.rising.is_a?(FalseClass))
 
     # check the condition info
     assert_instance_of YahooWeather::Condition, response.condition
     _assert_valid_weather_code response.condition.code
     assert_instance_of Time, response.condition.date
     assert_kind_of Numeric, response.condition.temp
-    assert (response.condition.text && response.condition.text.length > 0)
+    assert(response.condition.text && response.condition.text.length > 0)
 
     # check the forecast info
     assert_not_nil response.forecasts
@@ -87,22 +87,22 @@ class TestAPI < Test::Unit::TestCase
     assert_equal response.forecasts.length, 2
     response.forecasts.each do |forecast|
       assert_instance_of YahooWeather::Forecast, forecast
-      assert (forecast.day && forecast.day.length == 3)
+      assert(forecast.day && forecast.day.length == 3)
       assert_instance_of Time, forecast.date
       assert_kind_of Numeric, forecast.low
       assert_kind_of Numeric, forecast.high
-      assert (forecast.low <= forecast.high)
-      assert (forecast.text && forecast.text.length > 0)
+      assert(forecast.low <= forecast.high)
+      assert(forecast.text && forecast.text.length > 0)
       _assert_valid_weather_code forecast.code
     end
     
     # check the basic attributes
-    assert (response.description && response.description.length > 0)
-    assert (response.image_url =~ /yimg\.com/)
+    assert(response.description && response.description.length > 0)
+    assert(response.image_url =~ /yimg\.com/)
     assert_kind_of Numeric, response.latitude
     assert_kind_of Numeric, response.longitude
-    assert (response.page_url =~ /\.html$/)
-    assert (response.title && response.title.length > 0)
+    assert(response.page_url =~ /\.html$/)
+    assert(response.title && response.title.length > 0)
     assert_not_nil (response.title.index("#{response.location.city}, #{response.location.region}"))
   end
     
