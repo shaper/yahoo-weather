@@ -1,0 +1,12 @@
+* [shaper] update documentation to reflect reality and use suffix for
+  rdoc format.
+
+* [shaper] move source repository to github.
+
+* [shaper] use Hoe for Rakefile and gem management.
+
+* [shaper] fix test warnings.
+
+= 20061105
+
+* [shaper] Initial version.

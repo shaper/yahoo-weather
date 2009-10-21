@@ -1,49 +1,25 @@
 require 'rubygems'
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/gempackagetask'
+require 'hoe'
+$:.unshift(File.dirname(__FILE__) + "/lib")
+require 'yahoo-weather'
 
-spec = Gem::Specification.new do |s|
-  s.name = 'yahoo-weather'
-  s.version = '1.0.0'
-  s.summary = 'A Ruby object-oriented interface to the Yahoo! Weather service.'
-  s.author = 'Walter Korman'
-  s.email = 'shaper@wgks.org'
-  s.platform = Gem::Platform::RUBY
-  s.rubyforge_project = 'yahoo-weather'
-  s.has_rdoc = true
-  s.extra_rdoc_files = [ 'README' ]
-  s.rdoc_options << '--main' << 'README'
-  s.test_files = Dir.glob('test/test_*.rb')  
-  s.files = Dir.glob("{examples,lib,test}/**/*") +
-    [ 'AUTHORS', 'CHANGELOG', 'LICENSE', 'README', 'Rakefile', 'TODO' ]
-  s.add_dependency("xml-simple", ">= 1.0.9")
+Hoe.spec('yahoo-weather') do |p|
+  self.version = YahooWeather::VERSION
+  self.rubyforge_name = 'yahoo-weather'
+  self.author = 'Walter Korman'
+  self.email = 'shaper@fatgoose.com'
+  self.extra_deps << [ 'xml-simple', '>= 1.0.9' ]
+  self.summary = 'A Ruby object-oriented interface to the Yahoo! Weather service.'
+  self.description = <<EDOC
+The yahoo-weather rubygem provides a Ruby object-oriented interface to the
+Yahoo! Weather service described in detail at:
+
+http://developer.yahoo.com/weather
+EDOC
+  self.url = 'http://rubyforge.org/projects/yahoo-weather'
+  self.changes = p.paragraphs_of('CHANGELOG.rdoc', 0..1).join("\n\n")
+  self.remote_rdoc_dir = '' # Release to root
+  self.readme_file = 'README.rdoc'
+  self.history_file = 'CHANGELOG.rdoc'
+  self.extra_rdoc_files = [ 'CHANGELOG.rdoc', 'README.rdoc' ]
 end
-
-desc 'Run tests'
-task :default => [ :test ]
-
-Rake::TestTask.new('test') do |t|
-  t.libs << 'test'
-  t.pattern = 'test/test_*.rb'
-  t.verbose = true
-end
-
-desc 'Generate RDoc'
-Rake::RDocTask.new :rdoc do |rd|
-  rd.rdoc_dir = 'doc'
-  rd.rdoc_files.add 'lib', 'README'
-  rd.main = 'README'
-end
-
-desc 'Build Gem'
-Rake::GemPackageTask.new spec do |pkg|
-  pkg.need_tar = true
-end
-
-desc 'Clean up'
-task :clean => [ :clobber_rdoc, :clobber_package ]
-
-desc 'Clean up'
-task :clobber => [ :clean ]

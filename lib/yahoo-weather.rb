@@ -20,7 +20,9 @@ require 'pp'
 require 'time'
 require 'xmlsimple'
 
-module YahooWeather
+class YahooWeather
+
+  VERSION = '1.0.1'
 
   # Describes astronomy information for a particular location.
   class Astronomy
