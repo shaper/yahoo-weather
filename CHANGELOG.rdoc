@@ -1,3 +1,9 @@
+* [shaper] revise atmosphere.barometer to reflect tri-state as
+  "steady", "rising", or "falling" via one of the new
+  YahooWeather::Atmosphere::Barometer constants, whereas previously it
+  was simply a boolean for whether rising.  Thanks to Andy Weber for
+  suggestion.
+
 = YAHOO_WEATHER_20091021_1_0_1
 
 * [shaper] update documentation to reflect reality and use suffix for

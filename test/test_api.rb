@@ -72,7 +72,7 @@ class TestAPI < Test::Unit::TestCase
     assert_kind_of Numeric, response.atmosphere.humidity
     assert_kind_of Numeric, response.atmosphere.visibility
     assert_kind_of Numeric, response.atmosphere.pressure
-    assert(response.atmosphere.rising.is_a?(TrueClass) || response.atmosphere.rising.is_a?(FalseClass))
+    assert(YahooWeather::Atmosphere::Barometer::ALL.include?(response.atmosphere.barometer))
 
     # check the condition info
     assert_instance_of YahooWeather::Condition, response.condition

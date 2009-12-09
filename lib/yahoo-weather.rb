@@ -98,6 +98,17 @@ class YahooWeather
 
   # Describes the specific atmospheric conditions at a location.
   class Atmosphere
+    # Constants representing the state of the barometric pressure.
+    #
+    class Barometer
+      STEADY = 'steady'
+      RISING = 'rising'
+      FALLING = 'falling'
+
+      # lists all possible barometer constants
+      ALL = [ STEADY, RISING, FALLING ]
+    end
+
     # the humidity of the surroundings.
     attr_reader :humidity
     
@@ -107,14 +118,22 @@ class YahooWeather
     # the pressure level of the surroundings.
     attr_reader :pressure
     
-    # whether the air currents are rising.
-    attr_reader :rising
-    
+    # the state of the barometer, defined as one of the
+    # YahooWeather::Atmosphere::Barometer constants.
+    attr_reader :barometer
+
     def initialize (payload)
       @humidity = payload['humidity'].to_i
       @visibility = payload['visibility'].to_i
       @pressure = payload['pressure'].to_f
-      @rising = (payload['rising'] == "1")
+
+      # map barometric pressure direction to appropriate constant
+      @barometer = nil
+      case payload['rising'].to_i
+      when 0: @barometer = Barometer::STEADY
+      when 1: @barometer = Barometer::RISING
+      when 2: @barometer = Barometer::FALLING
+      end
     end
   end
   
