@@ -16,13 +16,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 require 'net/http'
-require 'pp'
 require 'time'
 require 'xmlsimple'
 
 class YahooWeather
 
-  VERSION = '1.0.1'
+  VERSION = '1.1.0'
 
   # Describes astronomy information for a particular location.
   class Astronomy

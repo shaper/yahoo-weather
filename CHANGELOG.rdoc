@@ -1,3 +1,5 @@
+= YAHOO_WEATHER_20091209_1_1_0
+
 * [shaper] revise atmosphere.barometer to reflect tri-state as
   "steady", "rising", or "falling" via one of the new
   YahooWeather::Atmosphere::Barometer constants, whereas previously it
