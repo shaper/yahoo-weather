@@ -1,3 +1,7 @@
+* [shaper] refactor for single class per file.
+
+* [shaper] fix km/h unit speed in test.
+
 = YAHOO_WEATHER_20091209_1_1_0
 
 * [shaper] revise atmosphere.barometer to reflect tri-state as
