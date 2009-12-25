@@ -122,7 +122,7 @@ class TestAPI < Test::Unit::TestCase
       assert_equal units.temperature, 'C'
       assert_equal units.distance, 'km'
       assert_equal units.pressure, 'mb'
-      assert_equal units.speed, 'kph'
+      assert_equal units.speed, 'km/h'
     end
   end
 end
