@@ -17,13 +17,11 @@
 
 require 'net/http'
 require 'time'
-require 'xmlsimple'
+require 'nokogiri'
 
 class YahooWeather
+  VERSION = '1.2.0'
 
-  VERSION = '1.1.0'
-
-  private
   def self._parse_time (text)
     (text) ? Time.parse(text) : nil
   end
@@ -34,6 +32,7 @@ require 'yahoo-weather/atmosphere'
 require 'yahoo-weather/client'
 require 'yahoo-weather/condition'
 require 'yahoo-weather/forecast'
+require 'yahoo-weather/image'
 require 'yahoo-weather/location'
 require 'yahoo-weather/response'
 require 'yahoo-weather/units'

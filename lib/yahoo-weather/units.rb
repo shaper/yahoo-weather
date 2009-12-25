@@ -1,5 +1,8 @@
 # Describes the units of measure with which weather information is provided.
 class YahooWeather::Units
+  FAHRENHEIT = 'f'
+  CELSIUS = 'c'
+
   # the units in which temperature is measured, e.g. +F+ for +Fahrenheit+ or +C+ for +Celsius+.
   attr_reader :temperature
 

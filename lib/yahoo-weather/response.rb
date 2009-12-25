@@ -32,9 +32,9 @@ class YahooWeather::Response
   # weather conditions for the requested location.
   attr_reader :description
 
-  # a link to the Yahoo! Weather image icon representing the current weather
-  # conditions visually.
-  attr_reader :image_url
+  # a YahooWeather::Image record describing an image icon
+  # representing the current weather.
+  attr_reader :image
 
   # the latitude of the location for which weather is detailed.
   attr_reader :latitude
@@ -55,32 +55,31 @@ class YahooWeather::Response
   # the prose descriptive title of the weather information.
   attr_reader :title
 
-  # regular expression used to pull the weather image icon from full
-  # description text.
-  @@REGEXP_IMAGE = Regexp.new(/img src="([^"]+)"/)
-
-  def initialize (request_location, request_url, payload)
+  def initialize (request_location, request_url, doc)
+    # save off the request params
     @request_location = request_location
     @request_url = request_url
 
-    root = payload['channel'].first
-    @astronomy = YahooWeather::Astronomy.new root['astronomy'].first
-    @location = YahooWeather::Location.new root['location'].first
-    @units = YahooWeather::Units.new root['units'].first
-    @wind = YahooWeather::Wind.new root['wind'].first
-    @atmosphere = YahooWeather::Atmosphere.new root['atmosphere'].first
+    # parse the nokogiri xml document to gather response data
+    root = doc.xpath('/rss/channel').first
 
-    item = root['item'].first
-    @condition = YahooWeather::Condition.new item['condition'].first
+    @astronomy = YahooWeather::Astronomy.new(root.xpath('yweather:astronomy').first)
+    @location = YahooWeather::Location.new(root.xpath('yweather:location').first)
+    @units = YahooWeather::Units.new(root.xpath('yweather:units').first)
+    @wind = YahooWeather::Wind.new(root.xpath('yweather:wind').first)
+    @atmosphere = YahooWeather::Atmosphere.new(root.xpath('yweather:atmosphere').first)
+    @image = YahooWeather::Image.new(root.xpath('image').first)
+
+    item = root.xpath('item').first
+    @condition = YahooWeather::Condition.
+      new(item.xpath('yweather:condition').first)
     @forecasts = []
-    item['forecast'].each { |forecast| @forecasts << YahooWeather::Forecast.new(forecast) }
-    @latitude = item['lat'].first.to_f
-    @longitude = item['long'].first.to_f
-    @page_url = item['link'].first
-    @title = item['title'].first
-    @description = item['description'].first
-
-    match_data = @@REGEXP_IMAGE.match(description)
-    @image_url = (match_data) ? match_data[1] : nil
+    item.xpath('yweather:forecast').each { |forecast| 
+      @forecasts << YahooWeather::Forecast.new(forecast) }
+    @latitude = item.xpath('geo:lat').first.content.to_f
+    @longitude = item.xpath('geo:long').first.content.to_f
+    @page_url = item.xpath('link').first.content
+    @title = item.xpath('title').first.content
+    @description = item.xpath('description').first.content
   end
 end

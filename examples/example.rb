@@ -16,7 +16,7 @@ edoc
 # html output
 print <<edoc
 <div>
-  <img src="#{response.image_url}"><br/>
+  <img src="#{response.image.url}"><br/>
   #{response.condition.temp} degrees #{response.units.temperature}<br/>
   #{response.condition.text}<br>
   Forecast:<br/>

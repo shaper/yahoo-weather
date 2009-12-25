@@ -1,3 +1,14 @@
+* [shaper] upped library to version 1.2.0 to reflect changes.
+
+* [shaper] use new Yahoo Weather API at 
+  http://weather.yahooapis.com/forecastrss
+
+* [shaper] shift xml parsing to use nokogiri rather than xml-simple.
+
+* [shaper] shift from Response.image_url to Response.image which
+  contains the new YahooWeather::Image record with the old image url
+  plus more detail as now provided in the API response.
+
 * [shaper] refactor for single class per file.
 
 * [shaper] fix km/h unit speed in test.
