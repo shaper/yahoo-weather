@@ -1,0 +1,3 @@
+- fix YahooWeather::_parse_time hack
+- use open-uri, custom user agent, gzip compression for fetching content
+- provide easy way to map name/zip to woeid?
