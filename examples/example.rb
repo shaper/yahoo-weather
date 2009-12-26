@@ -4,17 +4,20 @@ require 'rubygems'
 require 'yahoo-weather'
 
 @client = YahooWeather::Client.new
-response = @client.lookup_location('98103')
+# look up WOEID via http://weather.yahoo.com; enter location by city
+# name or zip and WOEID is at end of resulting page url.  herein we use
+# the WOEID for Santa Monica, CA.
+response = @client.lookup_by_woeid(2488892)
 
 # straight text output
-print <<edoc
+print <<EDOC
 #{response.title}
-#{response.condition.temp} degrees #{response.units.temperature}
+#{response.condition.temp} degrees
 #{response.condition.text}
-edoc
+EDOC
 
-# html output
-print <<edoc
+# sample html output
+print <<EDOC
 <div>
   <img src="#{response.image.url}"><br/>
   #{response.condition.temp} degrees #{response.units.temperature}<br/>
@@ -24,4 +27,4 @@ print <<edoc
   #{response.forecasts[1].day} - #{response.forecasts[1].text}.  High: #{response.forecasts[1].high} Low: #{response.forecasts[1].low}<br/>
   More information <a href="#{response.page_url}">here</a>.
 </div>
-edoc
+EDOC

@@ -5,22 +5,33 @@
 yahoo-weather provides an object-oriented interface to the Yahoo! Weather XML
 RSS feed detailed at http://developer.yahoo.com/weather.
 
-People care a lot about the weather, which sometimes seems ironic given that
-they can just glance out the window, but we can all understand the fascination
-with details and forecasting.
+People care a lot about the weather.  This may seem ironic given they
+can just glance out the window.  However, I belive we can all
+understand a fascination with details and forecasting.
 
-Log the weather information to your database! Graph it to your heart's
-content! Write a widget that emails the weather to your cell phone every five
-minutes with a link to your friend's PayPal account to deposit money if the
-weather's sunny and you both bet that it would be rainy. And the fun doesn't
-have to stop there.
+Log the weather information to your database!  Graph it to your
+heart's content!  Write a widget that emails the weather to your cell
+phone every five minutes with a link to your friend's PayPal account
+to deposit money if the weather's sunny and you both bet that it would
+be rainy. And the fun doesn't have to stop there.
 
-The RubyForge project page is at http://rubyforge.org/projects/yahoo-weather.
+The RubyForge project page for this library is at
+http://rubyforge.org/projects/yahoo-weather.
 
 Source code is at http://github.com/shaper/yahoo-weather.
 
-== Installation
+NOTE: This library was updated as of December 2009 to use a new
+WOEID-based lookup interface.  Yahoo has deprecated the older
+non-WOEID-based lookup API.  The archived page with the deprecated API
+details is at:
 
+http://developer.yahoo.com/weather/archive.html
+
+The older interface is still operational but users of this library
+should shift from using YahooWeather::Client::lookup_location to
+YahooWeather::Client::lookup_by_woeid.
+
+== Installation
 
 Install +rubygems+ if you don't already have it.  See http://rubyforge.org/projects/rubygems/.
 
@@ -36,7 +47,10 @@ A simple example program:
  require 'yahoo-weather'
 
  @client = YahooWeather::Client.new
- response = @client.lookup_location('98103')
+ # look up WOEID via http://weather.yahoo.com; enter location by city
+ # name or zip and WOEID is at end of resulting page url.  herein we use
+ # the WOEID for Santa Monica, CA.
+ response = @client.lookup_by_woeid(2488892)
 
  # straight text output
  print <<edoc
@@ -60,17 +74,17 @@ A simple example program:
     
 Produces output as:
 
- Conditions for Seattle, WA at 2:53 pm PST
- 55 degrees F
- Light Rain
+ Conditions for Santa Monica, CA at 10:51 am PST
+ 56 degrees
+ Partly Cloudy
  <div>
-   <img src="http://us.i1.yimg.com/us.yimg.com/i/us/we/52/11.gif"><br/>
-   55 degrees F<br/>
-   Light Rain<br>
+   <img src="http://l.yimg.com/a/i/us/nws/th/main_142b.gif"><br/>
+   56 degrees F<br/>
+   Partly Cloudy<br>
    Forecast:<br/>
-   Sun - Rain/Wind.  High: 56 Low: 54<br/>
-   Mon - Heavy Rain/Wind.  High: 60 Low: 54<br/>
-   More information <a href="http://us.rd.yahoo.com/dailynews/rss/weather/Seattle__WA/*http://xml.weather.yahoo.com/forecast/98103_f.html">here</a>.
+   Sat - Mostly Cloudy.  High: 59 Low: 46<br/>
+   Sun - Partly Cloudy.  High: 64 Low: 48<br/>
+   More information <a href="http://us.rd.yahoo.com/dailynews/rss/weather/Santa_Monica__CA/*http://weather.yahoo.com/forecast/USCA1024_f.html">here</a>.
  </div>
 
 There is a variety of detailed weather information in other attributes of the
