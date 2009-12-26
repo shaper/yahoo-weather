@@ -3,7 +3,9 @@
 * [shaper] upped library to version 1.2.0 to reflect changes.
 
 * [shaper] added new client.lookup_by_woeid method which should be
-  used instead of the now-deprecated lookup_location method.
+  used instead of the now-deprecated lookup_location method.  Thanks
+  to Chris Cummer (http://github.com/senorprogrammer) for pointing out
+  the new WOEID-based Yahoo API functionality.
 
 * [shaper] use new Yahoo Weather API at 
   http://weather.yahooapis.com/forecastrss
