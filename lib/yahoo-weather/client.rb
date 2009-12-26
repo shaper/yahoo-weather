@@ -21,8 +21,8 @@ class YahooWeather::Client
   # WOEID is 2442047.
   #
   # +units+ allows specifying whether to retrieve information in
-  # +Fahrenheit+ as +YahooWeather::Units::FAHRENHEIT+, or +Celsius+ as
-  # +YahooWeather::Units::CELSIUS+, and defaults to fahrenheit.
+  # +Fahrenheit+ as YahooWeather::Units::FAHRENHEIT, or +Celsius+ as
+  # YahooWeather::Units::CELSIUS, and defaults to fahrenheit.
   #
   def lookup_by_woeid (woeid, units = 'f')
     url = @api_url + '?w=' + CGI.escape(woeid.to_s) + '&u=' + CGI.escape(units)
@@ -43,8 +43,8 @@ class YahooWeather::Client
   # 'USWA0395.html', so the location code for Seattle is 'USWA0395'.
   #
   # +units+ allows specifying whether to retrieve information in
-  # +Fahrenheit+ as +YahooWeather::Units::FAHRENHEIT+, or +Celsius+ as
-  # +YahooWeather::Units::CELSIUS+, and defaults to fahrenheit.
+  # +Fahrenheit+ as YahooWeather::Units::FAHRENHEIT, or +Celsius+ as
+  # YahooWeather::Units::CELSIUS, and defaults to fahrenheit.
   #
   def lookup_location (location, units = 'f')
     url = @api_url + '?p=' + CGI.escape(location) + '&u=' + CGI.escape(units)

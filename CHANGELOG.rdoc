@@ -1,3 +1,5 @@
+= YAHOO_WEATHER_20091226_1_2_0
+
 * [shaper] upped library to version 1.2.0 to reflect changes.
 
 * [shaper] added new client.lookup_by_woeid method which should be

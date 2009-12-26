@@ -6,8 +6,8 @@ yahoo-weather provides an object-oriented interface to the Yahoo! Weather XML
 RSS feed detailed at http://developer.yahoo.com/weather.
 
 People care a lot about the weather.  This may seem ironic given they
-can just glance out the window.  However, I belive we can all
-understand a fascination with details and forecasting.
+can just glance out the window.  However, we can all understand a
+fascination with details and forecasting.
 
 Log the weather information to your database!  Graph it to your
 heart's content!  Write a widget that emails the weather to your cell
