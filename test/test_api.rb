@@ -122,6 +122,7 @@ class TestAPI < Test::Unit::TestCase
       assert(response.image.url =~ /yimg\.com/)
       assert_kind_of Numeric, response.latitude
       assert_kind_of Numeric, response.longitude
+      assert_instance_of Time, response.pubdate
       assert(response.page_url =~ /\.html$/)
       assert(response.title && response.title.length > 0)
       assert_not_nil(response.title.index("#{response.location.city}, #{response.location.region}"))
