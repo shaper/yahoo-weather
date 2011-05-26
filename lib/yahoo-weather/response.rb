@@ -1,3 +1,4 @@
+# TODO: Add pub date
 # Describes the weather conditions for a particular requested location.
 class YahooWeather::Response
   # a YahooWeather::Astronomy object detailing the sunrise and sunset
@@ -54,6 +55,9 @@ class YahooWeather::Response
 
   # the prose descriptive title of the weather information.
   attr_reader :title
+  
+  # the date in which the weather data was last updated
+  attr_reader :pubdate
 
   def initialize (request_location, request_url, doc)
     # save off the request params
@@ -81,5 +85,6 @@ class YahooWeather::Response
     @page_url = item.xpath('link').first.content
     @title = item.xpath('title').first.content
     @description = item.xpath('description').first.content
+    @pubdate = item.xpath('pubdate').first.content
   end
 end
