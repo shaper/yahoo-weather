@@ -1,4 +1,3 @@
-# TODO: Add pub date
 # Describes the weather conditions for a particular requested location.
 class YahooWeather::Response
   # a YahooWeather::Astronomy object detailing the sunrise and sunset
@@ -85,6 +84,6 @@ class YahooWeather::Response
     @page_url = item.xpath('link').first.content
     @title = item.xpath('title').first.content
     @description = item.xpath('description').first.content
-    @pubdate = item.xpath('pubdate').first.content
+    @pubdate = item.xpath('pubDate').first.content
   end
 end
