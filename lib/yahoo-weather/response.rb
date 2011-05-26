@@ -84,6 +84,6 @@ class YahooWeather::Response
     @page_url = item.xpath('link').first.content
     @title = item.xpath('title').first.content
     @description = item.xpath('description').first.content
-    @pubdate = item.xpath('pubDate').first.content
+    @pubdate = YahooWeather._parse_time(item.xpath('pubDate').first.content)
   end
 end
