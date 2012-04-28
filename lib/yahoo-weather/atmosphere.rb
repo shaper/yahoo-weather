@@ -32,9 +32,12 @@ class YahooWeather::Atmosphere
     # map barometric pressure direction to appropriate constant
     @barometer = nil
     case payload['rising'].to_i
-    when 0: @barometer = Barometer::STEADY
-    when 1: @barometer = Barometer::RISING
-    when 2: @barometer = Barometer::FALLING
+    when 0
+      @barometer = Barometer::STEADY
+    when 1 
+      @barometer = Barometer::RISING
+    when 2
+      @barometer = Barometer::FALLING
     end
   end
 end
