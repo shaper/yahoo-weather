@@ -21,7 +21,7 @@ require 'time'
 require 'nokogiri'
 
 class YahooWeather
-  VERSION = '1.2.0'
+  VERSION = '1.2.1'
 
   def self._parse_time (text)
     (text) ? Time.parse(text) : nil
