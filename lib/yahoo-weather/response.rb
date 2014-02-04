@@ -54,6 +54,9 @@ class YahooWeather::Response
 
   # the prose descriptive title of the weather information.
   attr_reader :title
+  
+  # the date in which the weather data was last updated
+  attr_reader :pubdate
 
   def initialize (request_location, request_url, doc)
     # save off the request params
@@ -81,5 +84,6 @@ class YahooWeather::Response
     @page_url = item.xpath('link').first.content
     @title = item.xpath('title').first.content
     @description = item.xpath('description').first.content
+    @pubdate = YahooWeather._parse_time(item.xpath('pubDate').first.content)
   end
 end
